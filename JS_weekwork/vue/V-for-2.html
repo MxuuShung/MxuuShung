@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+<body>
+    <div id="app">
+        <h4>缺少 key</h4>
+        <ul>
+            <li v-for = "(item, key) in arrayData">
+                {{ key }} - {{ item.name }} {{ item.age }} 歲
+                <input type="text">
+            </li>
+        </ul>
+        <h4>加上 key</h4>
+        <ul>
+            <li v-for = "(item, key) in arrayData" :key = "item.age">
+                {{ key }} - {{ item.name }} {{ item.age }} 歲
+                <input type="text">
+            </li>
+        </ul>
+        <button class="btn btn-outline-primery" @lick = "reverseArray">
+            反轉陣列
+        </button>
+    </div>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                arrayData: [
+                    {
+                        name: '卡斯伯',
+                        age: 35
+                    },
+                    {
+                        name: 'Ray',
+                        age: 18 //Ray都說話了，永遠的18歲跑不掉了XD
+                    },
+                    {
+                        name: '洧杰',
+                        age: 33
+                    }
+                ]
+            },
+            methods: {
+                reverseArray: function () {
+                    this.arrayData.reverse()
+                    console.log(this.arrayData)
+                },
+            }
+        });
+    </script>
+
+</body>
+</html>

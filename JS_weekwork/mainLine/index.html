@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--取得遠端行為-->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!--樣式-->
+  <style>
+    .completed {
+      text-decoration: line-through
+    }
+  </style>
+</head>
+<body>
+  <!--Vue-->
+  <div id="app" class="container my-3">
+    <button id="get" class="btn btn-outline-primary">Get</button>
+    <button id="post" class="btn btn-outline-primary">Post</button>
+    <button id="patch" class="btn btn-outline-primary">Patch</button>
+    <button id="delete" class="btn btn-outline-primary">Delete</button>
+  </div>
+
+  <script>
+
+    document.querySelector('#get').addEventListener('click', getData);
+    document.querySelector('#post').addEventListener('click', postData);
+    document.querySelector('#patch').addEventListener('click', patchData);
+    document.querySelector('#delete').addEventListener('click', deleteData);
+    
+    //三變數
+    var uuid = 'ee4428de-443e-4104-8262-95852e8b1acb';
+    var token = 'w9uKFNc8SkVeowWFPXUjmI77zegSKwcvFwpcM1hB8WGmZzUXO7DfDGTBtL6x';
+    var apiPath = 'https://course-ec-api.hexschool.io/';
+
+    // 小心，有錯～，請參考課程影片
+    var sampleData = {
+      title: '好茶',
+      category: 'tea',
+      content: '內容',
+      imageUrl: [
+        'https://images.unsplash.com/photo-1587918515749-a2a68b40a124?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+      ],
+      enabled: true,
+      origin_price: 100,
+      price: 90,
+      unit: '杯',
+    }
+    //token會一直變動!
+    axios.defaults.headers['Authorization'] = `Bearer ${token}`
+    // axios 設定說明：https://github.com/axios/axios#config-defaults
+    //"Authorization": "Bearer {token}"
+
+    function getData() {
+      console.log('getData');
+      var api = `${apiPath}api/${uuid}/admin/ec/products`;//取得所有 有s
+      console.log(api);
+      axios.get(api).then(function(res){
+        console.log(res);
+      });
+    }
+
+    function postData() {
+      console.log('postData');
+      var api = `${apiPath}api/${uuid}/admin/ec/product`;//建立資料 一筆 沒有s
+      //新增資料
+      var data = {
+      title: '火遁-豪火球之術',
+      category: 'skill',
+      content: '深吸一口氣，以結印方式引導自身查克拉結合肺中之氧，噴出龐大火球向前攻擊，大火球撞擊時產生爆炸與燃燒，附帶灼傷、中度燒傷效果',
+      description:'宇智波一族擅長之術，威力程度與查克拉成正比，就是不容易打中人',
+      imageUrl: [
+        'https://lh3.googleusercontent.com/proxy/rp12wgjptv3rN2cj7ExJVqr8yukEXP29UvYWNVoLWijW44VTipYD3XMdkBlmPSHtAnoreWYIrtGS3mz2tcq5x4GXFuw4mYKtaVGJprOIQUSeFpg33qY'
+      ],
+      enabled: true,
+      origin_price: 999,
+      price: 888,
+      unit: '本',
+    }
+      console.log(api);
+      axios.post(api,data).then(function(res){
+        console.log(res);
+      });
+    }
+
+    // function postData() {
+    //   console.log('postData');
+    //   var api = `${apiPath}api/${uuid}/admin/ec/product`;//建立資料 一筆 沒有s
+    //   //新增資料
+    //   var data = {
+    //   title: '雷遁-雷切',
+    //   category: 'skill',
+    //   content: '將雷系查克拉凝聚手中，將破壞力凝於一點，進行高速突刺，附帶破防、重傷、內傷',
+    //   description:'對使用者體能與動態視力高度要求，開發者曾用此招切開落雷，因此得名',
+    //   imageUrl: [
+    //     'https://images.900.tw/upload_file/39/content/49e857d8-58a3-d9f8-dd9d-67f347d26233.jpg'
+    //   ],
+    //   enabled: true,
+    //   origin_price: 4999,
+    //   price: 4888,
+    //   unit: '本',
+    // }
+    //   console.log(api);
+    //   axios.post(api,data).then(function(res){
+    //     console.log(res);
+    //   });
+    // }
+
+    // function postData() {
+    //   console.log('postData');
+    //   var api = `${apiPath}api/${uuid}/admin/ec/product`;//建立資料 一筆 沒有s
+    //   //新增資料
+    //   var data = {
+    //   title: '塵遁-分裂原界剝離之術',
+    //   category: 'skill',
+    //   content: '以風、火、水三查克拉組合而成，發射一半透明結界封住敵人並剝離成原子狀態，附加移除狀態',
+    //   description:'需精通風、火、水三系查克拉，並將二代目土影好感度提升至max，方可取得購買權',
+    //   imageUrl: [
+    //     'https://lh3.googleusercontent.com/proxy/OOhW7NpHkB91ih7gHTqI1ZunmnY9QdzXRen-K6bfbj_0H1SJoTqEqBPGjWMOBowcTh2N1fGpYpUh2kZZFMXBj53dr-wmFL3Rvd5T9IvXl3NkMRmyV6o'
+    //   ],
+    //   enabled: true,
+    //   origin_price: 9999,
+    //   price: 8888,
+    //   unit: '本',
+    // }
+    //   console.log(api);
+    //   axios.post(api,data).then(function(res){
+    //     console.log(res);
+    //   });
+    // }
+
+    // function postData() {
+    //   console.log('postData');
+    //   var api = `${apiPath}api/${uuid}/admin/ec/product`;//建立資料 一筆 沒有s
+    //   //新增資料
+    //   var data = {
+    //   title: '螺旋丸',
+    //   category: 'skill',
+    //   content: '將查克拉凝聚手上，並如水般流動向內壓縮，擊中時造成由內而外的爆發打擊，附帶中度癱瘓、破甲、殘廢',
+    //   description:'非天賦異稟之人難以學習，建議想購買者先拿個水球嘗試',
+    //   imageUrl: [
+    //     'https://store.zhentoo.com/uploads/D/57/D574BE9DAD.jpeg'
+    //   ],
+    //   enabled: true,
+    //   origin_price: 4999,
+    //   price: 4888,
+    //   unit: '本',
+    // }
+    //   console.log(api);
+    //   axios.post(api,data).then(function(res){
+    //     console.log(res);
+    //   });
+    // }
+
+    // function postData() {
+    //   console.log('postData');
+    //   var api = `${apiPath}api/${uuid}/admin/ec/product`;//建立資料 一筆 沒有s
+    //   //新增資料
+    //   var data = {
+    //   title: '血繼限界-须佐能乎',
+    //   category: 'skill',
+    //   content: '只有開啟萬花筒血輪眼之人才能習得之力量',
+    //   description:'想買也買不到阿～',
+    //   imageUrl: [
+    //     'https://s2.fafa01.com/uploads/e0/3/152848/14974532466378.jpg'
+    //   ],
+    //   enabled: true,
+    //   origin_price: 1,
+    //   price: 1,
+    //   unit: '本',
+    // }
+    //   console.log(api);
+    //   axios.post(api,data).then(function(res){
+    //     console.log(res);
+    //   });
+    // }
+
+    // function postData() {
+    //   console.log('postData');
+    //   var api = `${apiPath}api/${uuid}/admin/ec/product`;//建立資料 一筆 沒有s
+    //   //新增資料
+    //   var data = {
+    //   title: '夜凱',
+    //   category: 'skill',
+    //   content: '開啟第七門-死門處於血蒸氣狀態時才可使用，凝聚全身信念踢向敵人，專屬於凱一脈，附帶絕對必中、致死判定',
+    //   description:'不相信自己的人 連努力的價值都沒有',
+    //   imageUrl: [
+    //     'https://image-cdn.hypb.st/https%3A%2F%2Fhk.hypebeast.com%2Ffiles%2F2019%2F07%2Finfinity-studio-naruto-battle-series-guy-vs-madara-2.jpg?q=75&w=800&cbr=1&fit=max'
+    //   ],
+    //   enabled: true,
+    //   origin_price: 9999,
+    //   price: 1,
+    //   unit: '本',
+    // }
+    //   console.log(api);
+    //   axios.post(api,data).then(function(res){
+    //     console.log(res);
+    //   });
+    // }
+
+
+    function patchData() {
+      console.log('patchData');
+      var api = `${apiPath}api/${uuid}/admin/ec/product/J73Dvf21VpP1tWNPa5DT6f0iVUJqloBJZUyoSe8K8RJiWlAcEODjyYUXsXcEgLhZ`;//多了id 
+      
+      var data = {
+      title: '夜凱',
+      category: 'skill',
+      content: '開啟第七門-死門處於血蒸氣狀態時才可使用，凝聚全身信念踢向敵人，專屬於凱一脈，附帶絕對必中、致死判定',
+      description:'不相信自己的人 連努力的價值都沒有',
+      imageUrl: [
+        'https://image-cdn.hypb.st/https%3A%2F%2Fhk.hypebeast.com%2Ffiles%2F2019%2F07%2Finfinity-studio-naruto-battle-series-guy-vs-madara-2.jpg?q=75&w=800&cbr=1&fit=max'
+      ],
+      enabled: true,
+      origin_price: 9999,
+      price: 1,
+      unit: '本',
+    }
+      console.log(api);
+      axios.patch(api,data).then(function(res){
+        console.log(res);
+      });
+    }
+    
+    function deleteData() {
+      console.log('deleteData');
+      var api = `${apiPath}api/${uuid}/admin/ec/product/ha8igQUoebTYZ3U4V8iopoFNq8LDwdlfkAJ8oFPAMZ2GouFbWwgJdPMOhn5y5p7M`;//一樣根據id做刪除動作 
+      
+      console.log(api);
+      axios.delete(api).then(function(res){
+        console.log(res);
+      });
+    }
+
+  </script>
+</body>
+</html>

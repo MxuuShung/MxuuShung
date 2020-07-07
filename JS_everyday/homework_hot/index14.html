@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 參數預設值：https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Default_parameters
+    其餘參數：https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/rest_parameters -->
+    <script>
+        var myMoney = 0;
+        // money 需要給予預設值 500
+        function getMoney(money = 500) {
+            myMoney = money;
+            console.log(money);
+        }
+        getMoney();
+
+        // fruits 是一個陣列   
+        function buySomething(...theArgs) {
+            theArgs.forEach((item) => {
+                if ('lemon' === item) {
+                    console.log('買 3 個檸檬');
+                    myMoney -= 60;
+                } else if ('watermelon' === item && !'賣奇異果的') {
+                    console.log('買 1 個西瓜');
+                    myMoney -= 40;
+                } else if ('watermelon' === item && '賣奇異果的') {
+                    console.log('買 10 個西瓜');
+                    myMoney -= 400;
+                }
+            });
+            console.log(`小明剩下 ${myMoney} 元`)
+        }
+
+        buySomething('lemon', 'watermelon', 'kiwi');
+    </script>
+</body>
+
+</html>

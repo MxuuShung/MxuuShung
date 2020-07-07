@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>helloWorld</h1>
+    <div id="app">
+        {{message}}
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data:{
+                arrayData: [
+                    {
+                        name: '卡斯伯',
+                        age: 35
+                    },
+                    {
+                        name: 'Ray',
+                        age: 28
+                    },{
+                       name: '洧杰',
+                    age: 33 
+                    }
+                ],
+                objectData: {
+                    casper: {
+                        name: '卡斯伯',
+                        age: '35'
+                    },
+                    ray: {
+                        name: 'Ray',
+                        age: 32
+                    },
+                    gonsakon: {
+                        name: '洧杰',
+                        age: 33
+                    }
+                },
+            }
+        });
+    </script>
+    <!--
+        angular、react、vue都是用數據驅動內容
+
+    -->
+</body>
+</html>

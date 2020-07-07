@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div id="app" class="container">
+    陷阱： <button type="button" class="btn btn-danger" v-on:click="trap">點擊就會觸發的陷阱</button>  
+  </div>
+  <!--
+  v-on可以用@代換
+  @click
+  -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+  el: '#app',
+  data: {
+  },
+  methods: {
+    trap() {
+      alert('真心鎮的追捕人員踩到了陷阱')
+    }
+  }
+})
+</script>  
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>產品列表</h2>
+    <div id="app" class="card-columns">
+    </div>
+  </div>
+
+
+  <script>
+    var obj = {
+      data: {
+        uuid: 'ee4428de-443e-4104-8262-95852e8b1acb',
+        token: 'w9uKFNc8SkVeowWFPXUjmI77zegSKwcvFwpcM1hB8WGmZzUXO7DfDGTBtL6x',
+        apiPath: 'https://course-ec-api.hexschool.io/',
+        products: []
+      },
+      getData() {
+        //api憑證
+        axios.defaults.headers['Authorization'] = `Bearer ${ this.data.token}`
+        var vm = this;//此時this是指向obj
+        var url = `${ this.data.apiPath }api/${ this.data.uuid }/admin/ec/products`;
+        axios.get(url)
+          .then((response) => {
+            //若使用this，則會指向window
+            //取得資料後裝入obj.data.products
+            vm.data.products = response.data.data;
+            vm.render();//渲染
+          })
+      },
+      render() {
+        //綁定dom
+        var app = document.querySelector('#app');
+        //將遠端傳過來的資料丟入products
+        var products = this.data.products;
+        //準備將資料寫入str組合
+        var str = '';
+        products.forEach(item => {
+          console.log(item);
+          str += `
+            <div class="card">
+              <img src="${ item.imageUrl[0]}" class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">${ item.title}</h5>
+                <p class="card-text">${ item.content}</p>
+              </div>
+            </div>`
+        });
+        //畫面輸出
+        app.innerHTML = str;
+      }
+    }
+    obj.getData();
+  </script>
+</body>
+
+</html>

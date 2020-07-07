@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 解構文章：https://wcc723.github.io/javascript/2017/12/25/javascript-destructuring/
+         解構 MDN：https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment -->
+    <script>
+        // 請使用解構組合使 arr2 變成為 [1, 2, 3, 4, 5, 6] 的結果
+var arr = [1, 2, 3];
+var arr2 = [arr[0],arr[1],arr[2], 4, 5, 6]; // [1, 2, 3, 4, 5, 6]
+console.log(arr2);
+
+// 請使用解構組合以下兩個陣列為 [1, 2, 3, 4, 5, 6] 的結果
+var nums1 = [1, 2, 3];
+var nums2 = [4, 5, 6];
+var nums3 = [nums1[0],nums1[1],nums1[1],nums2[0],nums2[1],nums2[2]]
+console.log(nums3);
+
+// 請使用解構，取出 name 及 age 的變數
+const person = {
+  name: '小明',
+  age: 16
+}
+//let name = person.name;
+//let age = person.age;
+
+let {name, age} = person; //縮寫版 let物件參考person路徑位置
+console.log({name, age})
+// 請使用解構，將以下陣列分別取出為獨立變數 Ming, Auntie, Jay, Mei
+var people = ['小明', '漂亮阿姨', '杰倫', '小美'];
+
+let [Ming, Auntie, Jay, Mei] = people;
+console.log([Ming, Auntie, Jay, Mei]);
+    </script>
+</body>
+</html>

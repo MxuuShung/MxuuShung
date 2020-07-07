@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- ES6縮寫
+    https://wcc723.github.io/javascript/2017/12/23/javascript-short-hand/ -->
+  <script>
+    const fruits = {
+      watermelon: 10,
+      lemon: 3
+    }
+    const myMoney = 40;
+
+    const person = {
+      name: '小明',
+      run () {
+        console.log('拔腿跑')
+      }
+    }
+
+    const truck = {
+      driver: '小美',
+      drive () {
+        console.log('快溜喔');
+      },
+    }
+
+    const mayTruck = {
+      truck,
+      fruits,
+      person,
+          myMoney
+    }
+    console.log(mayTruck);
+  </script>
+</body>
+
+</html>

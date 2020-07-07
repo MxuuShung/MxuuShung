@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  h1{
+  color:white;
+}
+img {
+  max-width: 100%;
+}
+
+.river {
+  height: 50px;
+  color: white;
+  background-color: blue;
+}
+</style>
+<body>
+  <div id="app">
+    <img :src = imgUrl :alt = imgAlt >
+    
+    <div :class = "{river:isChecked}" ><h1>這裡有一條河</h1></div>
+    <label><input type="checkbox" v-model="isChecked">真心鎮的警察是否靠近 {{ isChecked }}</label>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+  el: '#app',
+  data: {
+    imgUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80',
+    imgAlt: '這是海洋',
+    
+    isChecked: false
+  }
+})
+  </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function fn(){
+      console.log(this, this.myName);
+    }
+    // var obj = {
+    //   myName: '小明',
+    //   fn: fn
+    // }
+    // //此時fn()只看前面這個物件
+    // //分為兩類
+    // //1.如果是傳統韓式，只看前面那個物件(不看函式如何定義)
+    // //箭頭函示 ->
+    // obj.fn();
+
+    // var obj = {
+    //   myName: '小明',
+    //   inner: {
+    //     myName: '小明家',
+    //     fn: fn
+    //   }
+    // }
+    // // 1.global
+    // // 2ming
+    // // 3ming home
+    // console.log(obj);
+    // console.log(obj.inner.fn());
+    // //由於是傳統韓式，只看前面那個物件(不看函式如何定義)
+    // //箭頭函式 ->是看如何定義的，且只看目前的作用域的 this (沒有自己的this)
+    // //所以要先知道那些是simple call 那些是傳統函式!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // //simple call
+    // //函式有無名子都可以，立即執行iife
+    // ;(function (){
+    //   console.log(obj.inner.fn());
+    //   //還是只看前面的物件
+    // })();
+
+    // var obj = {
+    //   myName: '小明',
+    //   inner: {
+    //     myName: '小明家',
+    //     fn1: function(){
+    //       fn(); //外層
+    //     },
+    //     fn2: function(){
+    //       console.log(this.myName);
+    //     },
+    //     fn3: function(){
+    //       setTimeout(function(){//call back function -> simple call
+    //         console.log(this.myName);
+    //       });
+    //     },
+    //     fn4:function(){
+    //       console.log(this.myName);
+    //       //箭頭函式用於方便開發，並沒有自己的this
+    //       (()=>{
+    //       console.log(this.myName);
+    //     })();
+    //     },
+    //     fn5: function(){
+    //       (function(){
+    //         console.log(this.myName);
+    //         //與fn4不同的是，又變回傳統函式，那就是看前面的物件了
+    //         //But，這邊的IIFE不是inner.fn5()這個函式，而是新的function()
+    //         //既然跟obj無關，那就是global了
+    //       })
+    //     }
+    //   }
+    // }
+    // obj.inner.fn1();
+    // //答案是全域 因為fn1()裡的fn()運作時呼叫外層第十行的fn()函式而非物件內的某fn()函式 
+    // //這個就是simple call
+    // obj.inner.fn2();
+    // //此時fn2()函式運作時，並沒有呼叫外層的函式，而是自身所以this指向前一個物件就是inner
+
+  //   var obj = {
+  //     myName: '小明',
+  //     inner: {
+  //       myName: '小明家',
+  //       fn1: function(){
+  //         //物件下需使用this，直接在物件最前面做定義
+  //         var vm = this;
+  //         console.log(vm.myName);
+  //         //將此時inner.fn1()函式的this賦予vm，
+  //        (function(){
+  //          //由於是在fn1下，可以吃到區域變數vm
+  //         console.log(vm.myName);
+  //       })();
+  //       (()=>{
+  //         console.log(vm.myName);
+  //         //還是小明家
+  //       })();
+  //     }
+  //   }
+  // }
+  //  obj.fn1();
+  // var obj = {
+  //     myName: '小明',
+  //     arr: [1,2,3,4,5],
+  //     fn1: function(){
+  //       var vm = this;
+  //       console.log(vm.myName);
+  //       this.arr.forEach(function(item)  { //call black function 簡易呼叫皆是指向全域
+  //         console.log(item);
+  //         console.log(this.myName);
+  //         console.log(vm.myName);
+  //       });
+  //     }
+  //   }
+
+  // obj.fn1();
+  // var obj = {
+  //     myName: '小明',
+  //     arr: [1,2,3,4,5],
+  //     fn1: function(){
+  //       var vm = this;
+  //       console.log(vm.myName);
+  //       this.arr.forEach((item) =>  { //改成箭頭函式，箭頭函式沒有自己的this
+  //         console.log(this.myName);   //會指向外層的this
+  //       });
+  //     }
+  //   }
+  // obj.fn1();
+
+  var obj = {
+    myName: '小明',
+    arr: [1,2,3,4,5],
+    fn1: function() {
+      var vm = this;
+      console.log(vm, this, vm === this);//此時的this指的是物件
+      console.log(this === obj);
+    }
+  }
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 閱讀課前預習
+https://hackmd.io/@hexschool/S1DJeKTdL/%2FRhud3_1PR9qv1RJyMfwUmA
+測驗 1：將小美所準備好的 Vue 資料呈現於畫面上（只能操作 HTML）
+https://codepen.io/Wcc723/pen/jOWLdeZ
+測驗 2：小明也要玩玩看：前方已經有小美所準備好的 {{ }}，請試著把 data 補上，讓畫面可運作
+https://codepen.io/Wcc723/pen/OJMjdap -->
+  <div id="app">
+    <div>難以飛躍的 {{ rock }} </div>
+    <div>轉角遇到 {{ wall }}</div>
+  </div>
+
+  <div id="app">
+    小明招喚 {{ variable }} 來擋住敵人的去路
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        rock: '巨大的岩石',
+        wall: '牆壁'
+      }
+    })
+
+  </script>
+</body>
+
+</html>
